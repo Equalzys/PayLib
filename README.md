@@ -6,19 +6,19 @@
 
 第一步：在项目根目录的 build.gradle 里添加jitpack库
 ```java
-allprojects {
-		repositories {
-			...
+        allprojects {
+		    repositories {
+			    ...
 			maven { url 'https://jitpack.io' }
-		}
-	}
+		    }
+	    }
 ```
   
 第二步：在app的 build.gradle 里添加依赖
 ```java
-dependencies {
+        dependencies {
 	        implementation 'com.github.Equalzys:PayLib:1.0.1'
-	}
+	    }
 ```
 
 第三步：初始化库（建议在application里初始化）
