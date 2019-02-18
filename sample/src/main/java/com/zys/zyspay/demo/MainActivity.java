@@ -1,10 +1,8 @@
 package com.zys.zyspay.demo;
 
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import com.zys.paylib.PayConfig;
 import com.zys.paylib.alipay.AlipayUtil;
 import com.zys.paylib.pay.AliPay;
 import com.zys.paylib.pay.PayTools;
