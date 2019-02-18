@@ -2,6 +2,7 @@
 [![](https://jitpack.io/v/Equalzys/PayLib.svg)](https://jitpack.io/#Equalzys/PayLib)
 
 支付宝支付，微信支付封装,使用简单方便
+只用自己服务器返回 支付宝或微信的预支付订单号 即可完成支付
 
 第一步：在项目根目录的 build.gradle 里添加jitpack库
 ```java
