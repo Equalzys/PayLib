@@ -1,4 +1,6 @@
 # PayLib
+[![](https://jitpack.io/v/Equalzys/PayLib.svg)](https://jitpack.io/#Equalzys/PayLib)
+
 支付宝支付，微信支付封装,使用简单方便
 
 第一步：在项目根目录的 build.gradle 里添加jitpack库
@@ -61,6 +63,7 @@ dependencies {
             }
         });
         
+	
         //微信支付
         String tradenumber = "这里是实际交易订单号-服务器返回";
         double money=0.01;//需要支付的金额
