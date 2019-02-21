@@ -9,7 +9,7 @@ import com.zys.paylib.wxpay.ParameterConfig;
 
 public class PayConfig {
 
-    private static final String TAG = "PayUtil";
+    private static final String TAG = "PayConfig";
 
 
     public static AliConfig alipay() {
