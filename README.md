@@ -17,7 +17,7 @@
 第二步：在app的 build.gradle 里添加依赖
 ```java
         dependencies {
-	        implementation 'com.github.Equalzys:PayLib:1.0.1'
+	        implementation 'com.github.Equalzys:PayLib:1.0.2'
 	    }
 ```
 
@@ -46,30 +46,33 @@
         //支付宝支付
         String tradenumber = "这里是实际交易订单号-服务器返回";
         double money=0.01;//需要支付的金额
-        PayTools payTools = new PayTools(new AliPay());
-        payTools.pay(this, tradenumber, money, new AlipayUtil.AlipayCallBack() {
-            @Override
-            public void success(String tradenumber, String resultInfo) {
-                //支付成功后操作
-            }
+        PayTools.aliPay(this)
+                .tradeNumber(tradenumber)
+                .money(money)
+                .intro("订单-")//（非必填）
+                .pay(new AlipayUtil.AlipayCallBack() {
+                    @Override
+                    public void success(String ordernumber, String resultInfo) {
 
-            @Override
-            public void fail(String resultInfo) {
-              //支付失败后操作
-            }
+                    }
 
-            @Override
-            public void authFail() {
-              //授权失败后操作
-            }
-        });
+                    @Override
+                    public void fail(String resultInfo) {
+
+                    }
+
+                });
+
         
 	
         //微信支付
         String tradenumber = "这里是实际交易订单号-服务器返回";
         double money=0.01;//需要支付的金额
-        PayTools payTools = new PayTools(new WxPay());
-        //支付回调在WXPayEntryActivity
-        payTools.pay(this, tradenumber, money, null);
+         PayTools.wxPay(this)
+                .tradeNumber(tradenumber)
+                .intro("订单-")//（非必填）
+                .money(money)
+                .pay();//支付回调在WXPayEntryActivity
+
 
 ```
