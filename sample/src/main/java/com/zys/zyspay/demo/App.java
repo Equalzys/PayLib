@@ -18,7 +18,7 @@ public class App extends Application {
                 .appId("2017******3659")
                 .rsa(RSA_PRIVATE)
                 .notifyUrl("http://www.xx**xx.com/api/trade/notify/alipay")
-                .intro("支付宝订单-")
+                .intro("支付宝订单-")//非必填
                 .init();
 
         //用到微信的时候配置
@@ -27,7 +27,7 @@ public class App extends Application {
                 .mchId("15******1")
                 .apiKey("Rd88G******I0ci406")
                 .notifyUrl("http://www.xx**xx.com/api/trade/notify/wxpay")
-                .intro("微信订单-")
+                .intro("微信订单-")//非必填
                 .init();
     }
 }

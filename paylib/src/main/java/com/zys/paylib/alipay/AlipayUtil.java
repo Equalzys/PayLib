@@ -18,7 +18,6 @@ import java.util.Map;
 import java.util.Random;
 
 
-
 public class AlipayUtil {
     String TAG = "AlipayUtil";
     private static AlipayUtil mUtil;
@@ -81,7 +80,7 @@ public class AlipayUtil {
                     } else {
                         Log.d(TAG, "授权失败");
                         if (callback != null) {
-                            callback.authFail();
+                            callback.fail("9000-授权失败");
                         }
                     }
                     break;
@@ -94,13 +93,18 @@ public class AlipayUtil {
         ;
     };
 
-    /**
-     * call alipay sdk pay. 调用SDK支付
-     */
+
     public void pay(final Activity activity, String body, String price, AlipayCallBack callback) {
 
+        pay(activity, "", body, price, callback);
+    }
+
+    public void pay(final Activity activity, String subject_start, String body, String price,
+                    AlipayCallBack callback) {
+
         if (TextUtils.isEmpty(APPID) || TextUtils.isEmpty(RSA_PRIVATE) || TextUtils.isEmpty(NOTIFY_URL)) {
-            new AlertDialog.Builder(activity).setTitle("警告").setMessage("需要配置APPID | RSA_PRIVATE| NOTIFY_URL\n请调用PayConfig进行初始化配置")
+            new AlertDialog.Builder(activity).setTitle("警告").setMessage("需要配置APPID | RSA_PRIVATE|" +
+                    " NOTIFY_URL\n请调用PayConfig进行初始化配置")
                     .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialoginterface, int i) {
@@ -110,9 +114,11 @@ public class AlipayUtil {
         }
         this.OutTradeNo = body;
         this.callback = callback;
-
+        if (TextUtils.isEmpty(subject_start)) {
+            subject_start = intro;
+        }
         Map<String, String> params = OrderInfoUtil.buildOrderParamMap(APPID, body, price,
-                intro + body, NOTIFY_URL, rsa2);
+                subject_start + body, NOTIFY_URL, rsa2);
         String orderParam = OrderInfoUtil.buildOrderParam(params);
 
         String privateKey = RSA_PRIVATE;
@@ -170,22 +176,19 @@ public class AlipayUtil {
         return "sign_type=\"RSA\"";
     }
 
-    public AlipayCallBack callback;
+    private AlipayCallBack callback;
 
     public interface AlipayCallBack {
         /**
          * 支付成功
          */
         void success(String ordernumber, String resultInfo);
+
         /**
          * 支付失败
          */
         void fail(String resultInfo);
 
-        /**
-         * 授权失败
-         */
-        void authFail();
     }
 
     public static String getAPPID() {

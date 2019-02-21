@@ -21,31 +21,33 @@ public class MainActivity extends AppCompatActivity {
     private void toAliPay() {
         String tradenumber = "这里是实际交易订单号-服务器返回";
         double money=0.01;//需要支付的金额
-        PayTools payTools = new PayTools(new AliPay());
-        payTools.pay(this, tradenumber, money, new AlipayUtil.AlipayCallBack() {
-            @Override
-            public void success(String tradenumber, String resultInfo) {
+        PayTools.aliPay(this)
+                .tradeNumber(tradenumber)
+                .money(money)
+                .intro("订单-")//（非必填）
+                .pay(new AlipayUtil.AlipayCallBack() {
+                    @Override
+                    public void success(String ordernumber, String resultInfo) {
 
-            }
+                    }
 
-            @Override
-            public void fail(String resultInfo) {
+                    @Override
+                    public void fail(String resultInfo) {
 
-            }
+                    }
 
-            @Override
-            public void authFail() {
-
-            }
-        });
+                });
 
     }
 
     private void toWXPay() {
         String tradenumber = "这里是实际交易订单号-服务器返回";
         double money=0.01;//需要支付的金额
-        PayTools payTools = new PayTools(new WxPay());
-        //支付回调在WXPayEntryActivity
-        payTools.pay(this, tradenumber, money, null);
+        PayTools.wxPay(this)
+                .tradeNumber(tradenumber)
+                .intro("订单-")//（非必填）
+                .money(money)
+                .pay();//支付回调在WXPayEntryActivity
+
     }
 }
