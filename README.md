@@ -23,6 +23,7 @@
 
 第三步：初始化库（建议在application里初始化）
 ```java
+	String RSA_PRIVATE="6e**********eo5ff9==";
         //用到支付宝的时候配置
         PayConfig.alipay()
                 .appId("2017******3659")
